@@ -1,0 +1,22 @@
+PODS:
+  - SDWebImage (5.1.0):
+    - SDWebImage/Core (= 5.1.0)
+  - SDWebImage/Core (5.1.0)
+  - XLPagerTabStrip (8.1.0)
+
+DEPENDENCIES:
+  - SDWebImage
+  - XLPagerTabStrip
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - SDWebImage
+    - XLPagerTabStrip
+
+SPEC CHECKSUMS:
+  SDWebImage: fb387001955223213dde14bc08c8b73f371f8d8f
+  XLPagerTabStrip: 22d4c58200d7c105e0e407ab6bfd01a5d85014be
+
+PODFILE CHECKSUM: b3d0880c8302869913b14bd73c3af76df55edf58
+
+COCOAPODS: 1.6.1
