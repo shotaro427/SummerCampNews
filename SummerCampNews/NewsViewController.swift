@@ -29,7 +29,6 @@ class NewsViewController: UIViewController, IndicatorInfoProvider, UITableViewDe
     // UIRefreshControl型の変数
     var refreshControl: UIRefreshControl!
     // 取得するニュースを格納する配列
-//    var articles = NSMutableArray()
     var articles: [Any] = []
     
     // XMLファイルに解析をかけた情報
@@ -40,7 +39,8 @@ class NewsViewController: UIViewController, IndicatorInfoProvider, UITableViewDe
     var titleString: String = ""
     // XMLファイルのリンク情報
     var linkString: String = ""
-
+    // XMLファイルの画像情報
+    var imageString: String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,10 +83,15 @@ class NewsViewController: UIViewController, IndicatorInfoProvider, UITableViewDe
     // セルのカスタマイズ
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "Cell")
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        
         // セルの背景色を決める
-        cell.backgroundColor = #colorLiteral(red: 0.7254902124, green: 0.4784313738, blue: 0.09803921729, alpha: 1)
-    
+        cell.backgroundColor = #colorLiteral(red: 0.2084727883, green: 1, blue: 0.8079068065, alpha: 1)
+        
+        // セルに画像をセット
+        if let stringURL = (articles[indexPath.row] as AnyObject).value(forKey: "image") as? String  {
+            cell.imageView?.image = getImageByURL(url: stringURL)
+        }
+        
         // 記事タイトル
         cell.textLabel?.text = (articles[indexPath.row] as AnyObject).value(forKey: "title") as? String
         // セルのタイトルのフォント
@@ -132,7 +137,6 @@ class NewsViewController: UIViewController, IndicatorInfoProvider, UITableViewDe
         articles = []
         // parserのdelegateを設定
         parser.delegate = self
-        
         // 解析開始
         parser.parse()
         // tabeleViewのリロード
@@ -151,6 +155,13 @@ class NewsViewController: UIViewController, IndicatorInfoProvider, UITableViewDe
             elements = [:]
             titleString = ""
             linkString = ""
+            imageString = ""
+        }
+        
+        // タグ名がenclosureの時の処理
+        if element == "enclosure" {
+            guard let string = attributeDict["url"] else { return }
+            imageString.append(string)
         }
     }
     
@@ -175,12 +186,54 @@ class NewsViewController: UIViewController, IndicatorInfoProvider, UITableViewDe
             }
             // linkStringの中身が空でないなら
             if linkString != "" {
-                // elementsに"link"というキーを付与しながらlinkStringnをセット
+                // elementsに"link"というキーを付与しながらlinkStringをセット
                 elements.setObject(linkString, forKey: "link" as NSCopying)
+            }
+            if imageString != "" {
+                // elementsに"image"というキーを付与しながらimageStringをセット
+                elements.setObject(imageString, forKey: "image" as NSCopying)
             }
             // articlesの中にelementsを入れる
             articles.append(elements)
         }
+    }
+    
+    // XMLファイルの画像情報(String型)からUIImage型にして返す関数
+    func getImageByURL(url: String) -> UIImage? {
+        // リサイズされた画像
+        var resizedImage: UIImage!
+        // URL型でurlを取得
+        guard let url: URL = URL(string: url) else { return nil }
+        do {
+            let data = try Data(contentsOf: url)
+            // urlから画像を取得
+            if let image = UIImage(data: data) {
+                // 画像をリサイズ
+                resizedImage = resize(image: image, width: 75)
+            }
+            return resizedImage
+        } catch let err {
+            print("Error: \(err.localizedDescription)")
+        }
+        return nil
+    }
+    
+    // 画像のサイズを変更する関数
+    func resize(image: UIImage, width: Double) -> UIImage {
+        
+        // オリジナル画像のサイズからアスペクト比を計算
+        let aspectScale = image.size.height / image.size.width
+        
+        // widthからアスペクト比を元にリサイズ後のサイズを取得
+        let resizedSize = CGSize(width: width, height: width * Double(aspectScale))
+        
+        // リサイズ後のUIImageを生成して返却
+        UIGraphicsBeginImageContext(resizedSize)
+        image.draw(in: CGRect(x: 0, y: 0, width: resizedSize.width, height: resizedSize.height))
+        let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return resizedImage!
     }
 
     // refreshの処理
