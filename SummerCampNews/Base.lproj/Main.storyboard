@@ -34,7 +34,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="KpW-q4-kwE">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="KpW-q4-kwE">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -64,7 +64,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="209" y="21"/>
+            <point key="canvasLocation" x="207" y="21"/>
         </scene>
         <!--NewsViewController-->
         <scene sceneID="ooy-tO-9kl">
@@ -73,13 +73,67 @@
                     <view key="view" contentMode="scaleToFill" id="DQ1-pw-yaj">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="488-4Q-ORc">
+                                <rect key="frame" x="0.0" y="44" width="414" height="768"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uCQ-Pv-j5L">
+                                <rect key="frame" x="0.0" y="812" width="414" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="WZ3-CL-65f"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem systemItem="cancel" id="RiP-ZE-Dqc">
+                                        <connections>
+                                            <action selector="cancel:" destination="v4y-ia-Gek" id="Qdg-wh-xPt"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="i5X-Z7-DVc"/>
+                                    <barButtonItem title="←" id="CIF-mx-Qtf">
+                                        <connections>
+                                            <action selector="backPage:" destination="v4y-ia-Gek" id="ZX3-VM-fqT"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="yfn-LZ-E2Z"/>
+                                    <barButtonItem title="→" id="Gzh-nh-gBW">
+                                        <connections>
+                                            <action selector="nextPage:" destination="v4y-ia-Gek" id="kE8-1B-ftf"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="B3k-11-O4C"/>
+                                    <barButtonItem systemItem="refresh" id="F9t-5F-xIF">
+                                        <connections>
+                                            <action selector="refreshPage:" destination="v4y-ia-Gek" id="dT0-WR-Bas"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="uCQ-Pv-j5L" firstAttribute="top" secondItem="488-4Q-ORc" secondAttribute="bottom" id="7mQ-PT-sPu"/>
+                            <constraint firstItem="488-4Q-ORc" firstAttribute="leading" secondItem="oDj-v3-t89" secondAttribute="leading" id="8Gc-Ah-FfD"/>
+                            <constraint firstItem="uCQ-Pv-j5L" firstAttribute="trailing" secondItem="oDj-v3-t89" secondAttribute="trailing" id="C4X-DX-odd"/>
+                            <constraint firstItem="oDj-v3-t89" firstAttribute="bottom" secondItem="uCQ-Pv-j5L" secondAttribute="bottom" id="RzW-S2-ZWi"/>
+                            <constraint firstItem="uCQ-Pv-j5L" firstAttribute="leading" secondItem="oDj-v3-t89" secondAttribute="leading" id="hLH-eU-Bk8"/>
+                            <constraint firstItem="488-4Q-ORc" firstAttribute="top" secondItem="oDj-v3-t89" secondAttribute="top" id="udk-eY-5Pk"/>
+                            <constraint firstItem="oDj-v3-t89" firstAttribute="trailing" secondItem="488-4Q-ORc" secondAttribute="trailing" id="ybh-tJ-Skp"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="oDj-v3-t89"/>
                     </view>
+                    <connections>
+                        <outlet property="toolBar" destination="uCQ-Pv-j5L" id="Anm-ot-koZ"/>
+                        <outlet property="webKit" destination="488-4Q-ORc" id="D8b-LD-sdH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oty-Qm-Uke" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="872" y="21"/>
+            <point key="canvasLocation" x="971" y="21"/>
         </scene>
     </scenes>
 </document>

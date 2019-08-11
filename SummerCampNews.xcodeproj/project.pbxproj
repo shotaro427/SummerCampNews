@@ -14,6 +14,7 @@
 		E286959822FF93040044F574 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E286959722FF93040044F574 /* Assets.xcassets */; };
 		E286959B22FF93040044F574 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E286959922FF93040044F574 /* LaunchScreen.storyboard */; };
 		E28695A322FF983F0044F574 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28695A222FF983F0044F574 /* NewsViewController.swift */; };
+		E28695A522FFBD620044F574 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E28695A422FFBD620044F574 /* WebKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		E286959A22FF93040044F574 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E286959C22FF93040044F574 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E28695A222FF983F0044F574 /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
+		E28695A422FFBD620044F574 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		EBD3786A9B19020238D68956 /* Pods-SummerCampNews.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SummerCampNews.debug.xcconfig"; path = "Target Support Files/Pods-SummerCampNews/Pods-SummerCampNews.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -35,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E28695A522FFBD620044F574 /* WebKit.framework in Frameworks */,
 				8CDF9F5F9CFB88E511F36628 /* Pods_SummerCampNews.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -54,6 +57,7 @@
 		C26D574C63409AA7BE6ABD30 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E28695A422FFBD620044F574 /* WebKit.framework */,
 				9A00948CAC50C3352AC15D3D /* Pods_SummerCampNews.framework */,
 			);
 			name = Frameworks;

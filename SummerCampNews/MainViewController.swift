@@ -8,6 +8,7 @@
 
 import UIKit
 import XLPagerTabStrip
+import WebKit
 
 class MainViewController: ButtonBarPagerTabStripViewController {
     
